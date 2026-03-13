@@ -1,0 +1,4 @@
+# ZAP Rules - tsv format
+# id	name	threshold	status
+# 10010	Cookie No HttpOnly Flag	IGNORE
+# 10011	Cookie Without Secure Flag	IGNORE
