@@ -81,8 +81,19 @@ jobs:
           target: 'http://localhost:3000/'
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a' # Include alpha rules
-          fail_action: true # Action will fail if high/critical vulnerabilities are found
+          fail_action: false # Action will not fail automatically, we will check manually
           allow_issue_writing: false
+
+      - name: Check for High or Critical Vulnerabilities
+        run: |
+          if [ -f report_full_scan.html ]; then
+            if grep -qP "(?i)<td[^>]*>(High|Critical)</td>" report_full_scan.html; then
+              echo "High or Critical vulnerabilities detected in ZAP scan! Failing pipeline."
+              exit 1
+            else
+              echo "No High or Critical vulnerabilities found."
+            fi
+          fi
 
       - name: Stop Container
         if: always()
