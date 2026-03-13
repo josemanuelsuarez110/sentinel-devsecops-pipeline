@@ -1,5 +1,5 @@
 {
-  "name": "secure-node-app",
+  "name": "sentinel-devsecops-pipeline",
   "version": "1.0.0",
   "description": "A secure Node.js application for DevOps pipeline demonstration.",
   "main": "server.js",
