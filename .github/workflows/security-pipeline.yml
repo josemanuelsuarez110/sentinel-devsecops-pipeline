@@ -82,6 +82,7 @@ jobs:
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a' # Include alpha rules
           fail_action: true # Action will fail if high/critical vulnerabilities are found
+          allow_issue_writing: false
 
       - name: Stop Container
         if: always()
@@ -95,7 +96,9 @@ jobs:
           # but ZAP action usually provides the report in artifacts.
           # Here we'll ensure the report is collected and labeled.
           mkdir -p reports
-          cp report_full_scan.html reports/
+          if [ -f report_full_scan.html ]; then
+            cp report_full_scan.html reports/
+          fi
           # Placeholder for PDF conversion logic if high-end PDF is strictly required
           echo "PDF Report placeholder" > reports/zap-report.pdf 
 
